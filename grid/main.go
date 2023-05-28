@@ -6,70 +6,87 @@ import (
 	"os/exec"
 )
 
-var a = ("┌──────────┬──────────┬──────────┐")
-var b = ("│          │          │          │")
-var c = ("│          │          │          │")
-var d = ("│          │          │          │")
-var e = ("│          │          │          │")
-var f = ("├──────────┼──────────┼──────────┤")
-var g = ("│          │          │          │")
-var h = ("│          │          │          │")
-var i = ("│          │          │          │")
-var j = ("│          │          │          │")
-var k = ("├──────────┼──────────┼──────────┤")
-var l = ("│          │          │          │")
-var m = ("│          │          │          │")
-var n = ("│          │          │          │")
-var o = ("│          │          │          │")
-var p = ("└──────────┴──────────┴──────────┘")
+var grid map[int]string = map[int]string{
+	1:  "┌──────────┬──────────┬──────────┐",
+	2:  "│          │          │          │",
+	3:  "│          │          │          │",
+	4:  "│          │          │          │",
+	5:  "│          │          │          │",
+	6:  "├──────────┼──────────┼──────────┤",
+	7:  "│          │          │          │",
+	8:  "│          │          │          │",
+	9:  "│          │          │          │",
+	10: "│          │          │          │",
+	11: "├──────────┼──────────┼──────────┤",
+	12: "│          │          │          │",
+	13: "│          │          │          │",
+	14: "│          │          │          │",
+	15: "│          │          │          │",
+	16: "└──────────┴──────────┴──────────┘",
+	17: "  \\  /  ",
+	18: "   \\/   ",
+	19: "   /\\   ",
+	20: "  /  \\  ",
+	21: "+------+",
+	22: "|      |",
+	23: "|      |",
+	24: "+------+",
+}
 
-var a1 = ("  ╲  ╱  ")
-var a2 = ("   ╲╱   ")
-var a3 = ("   ╱╲   ")
-var a4 = ("  ╱  ╲  ")
-
-var b1 = ("╭──────╮")
-var b2 = ("│      │")
-var b3 = ("│      │")
-var b4 = ("╰──────╯")
-
-func FullGrid() {
+func PrintGrid() {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
-	gridList := []string{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p}
-	for i := 0; i < len(gridList); i++ {
-		fmt.Println(gridList[i])
+	for i := 1; i <= 16; i++ {
+		fmt.Println(grid[i])
 	}
-
-	fmt.Println("----------------")
-	fmt.Println(b)
-	fmt.Println(c)
-	fmt.Println(d)
-	fmt.Println(e)
 }
+
 var boxCoordY = [][]int{{4, 12}, {17, 25}, {30, 38}}
+var boxCoordX = [][]int{{2, 3, 4, 5}, {7, 8, 9, 10}, {12, 13, 14, 15}}
 
 func PlacePlayer(player string, box int) {
-	selectedBox := []int{}
-	switch box{
+	selectedBoxY := []int{}
+	selectedBoxX := []int{}
+	switch box {
 	case 1:
-		selectedBox = boxCoordY[0]
+		selectedBoxY = boxCoordY[0]
+		selectedBoxX = boxCoordX[0]
 	case 2:
-		selectedBox = boxCoordY[1]
+		selectedBoxY = boxCoordY[1]
+		selectedBoxX = boxCoordX[0]
 	case 3:
-		selectedBox = boxCoordY[2]
+		selectedBoxY = boxCoordY[2]
+		selectedBoxX = boxCoordX[0]
+	case 4:
+		selectedBoxY = boxCoordY[0]
+		selectedBoxX = boxCoordX[1]
+	case 5:
+		selectedBoxY = boxCoordY[1]
+		selectedBoxX = boxCoordX[1]
+	case 6:
+		selectedBoxY = boxCoordY[2]
+		selectedBoxX = boxCoordX[1]
+	case 7:
+		selectedBoxY = boxCoordY[0]
+		selectedBoxX = boxCoordX[2]
+	case 8:
+		selectedBoxY = boxCoordY[1]
+		selectedBoxX = boxCoordX[2]
+	case 9:
+		selectedBoxY = boxCoordY[2]
+		selectedBoxX = boxCoordX[2]
 	}
 
 	if player == "o" {
-		b = b[:selectedBox[0]] + b1 + b[selectedBox[1]:]
-		c = c[:selectedBox[0]] + b2 + c[selectedBox[1]:]
-		d = d[:selectedBox[0]] + b3 + d[selectedBox[1]:]
-		e = e[:selectedBox[0]] + b4 + e[selectedBox[1]:]
+		grid[selectedBoxX[0]] = grid[selectedBoxX[0]][:selectedBoxY[0]] + grid[21] + grid[selectedBoxX[0]][selectedBoxY[1]:]
+		grid[selectedBoxX[1]] = grid[selectedBoxX[1]][:selectedBoxY[0]] + grid[22] + grid[selectedBoxX[1]][selectedBoxY[1]:]
+		grid[selectedBoxX[2]] = grid[selectedBoxX[2]][:selectedBoxY[0]] + grid[23] + grid[selectedBoxX[2]][selectedBoxY[1]:]
+		grid[selectedBoxX[3]] = grid[selectedBoxX[3]][:selectedBoxY[0]] + grid[24] + grid[selectedBoxX[3]][selectedBoxY[1]:]
 	} else if player == "x" {
-		b = b[:selectedBox[0]] + a1 + b[selectedBox[1]:]
-		c = c[:selectedBox[0]] + a2 + c[selectedBox[1]:]
-		d = d[:selectedBox[0]] + a3 + d[selectedBox[1]:]
-		e = e[:selectedBox[0]] + a4 + e[selectedBox[1]:]
+		grid[selectedBoxX[0]] = grid[selectedBoxX[0]][:selectedBoxY[0]] + grid[17] + grid[selectedBoxX[0]][selectedBoxY[1]:]
+		grid[selectedBoxX[1]] = grid[selectedBoxX[1]][:selectedBoxY[0]] + grid[18] + grid[selectedBoxX[1]][selectedBoxY[1]:]
+		grid[selectedBoxX[2]] = grid[selectedBoxX[2]][:selectedBoxY[0]] + grid[19] + grid[selectedBoxX[2]][selectedBoxY[1]:]
+		grid[selectedBoxX[3]] = grid[selectedBoxX[3]][:selectedBoxY[0]] + grid[20] + grid[selectedBoxX[3]][selectedBoxY[1]:]
 	}
 }
