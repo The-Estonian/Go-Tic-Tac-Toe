@@ -19,6 +19,8 @@ func Launch() {
 		if userInput == "Quit" || userInput == "quit" {
 			game = false
 		} else if userInput == "Start" || userInput == "start" {
+			playerXboxes := []int{}
+			playerOboxes := []int{}
 			for i := 1; i < 10; i++ {
 				grid.PrintGrid()
 				player := "x"
@@ -30,10 +32,15 @@ func Launch() {
 				userChoice := 0
 				fmt.Print("Choose a number from 1 to 9: ")
 				fmt.Scanln(&userChoice)
+				if player == "x" {
+					playerXboxes = append(playerXboxes, userChoice)
+				} else if player == "o" {
+					playerOboxes = append(playerOboxes, userChoice)
+				}
 				grid.PlacePlayer(player, userChoice)
+				fmt.Println(playerXboxes)
+				fmt.Println(playerOboxes)
 			}
-			// grid.PlacePlayer("x", 1)
-			// grid.PrintGrid()
 		}
 	}
 }
