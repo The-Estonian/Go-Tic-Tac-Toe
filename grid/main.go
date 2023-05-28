@@ -2,8 +2,7 @@ package grid
 
 import (
 	"fmt"
-	"os"
-	"os/exec"
+	"01.kood.tech/git/jsaar/tic_tac_toe/screenClear"
 )
 
 var grid map[int]string = map[int]string{
@@ -34,9 +33,7 @@ var grid map[int]string = map[int]string{
 }
 
 func PrintGrid() {
-	cmd := exec.Command("clear")
-	cmd.Stdout = os.Stdout
-	cmd.Run()
+	screenClear.Now()
 	for i := 1; i <= 16; i++ {
 		fmt.Println(grid[i])
 	}
