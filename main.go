@@ -17,11 +17,14 @@ x to enter x
 		fmt.Scanln(&userInput)
 		if userInput == "exit" {
 			game = false
-		} else if userInput == "o" {
-			grid.PlacePlayer("o")
+		} else if userInput == "1" {
+			grid.PlacePlayer("x", 2)
 			grid.FullGrid()
-		} else if userInput == "x" {
-			grid.PlacePlayer("x")
+		} else if userInput == "2" {
+			grid.PlacePlayer("x", 1)
+			grid.FullGrid()
+		} else if userInput == "3" {
+			grid.PlacePlayer("x", 3)
 			grid.FullGrid()
 		}
 	}
