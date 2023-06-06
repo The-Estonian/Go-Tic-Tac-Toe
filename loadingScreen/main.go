@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+
 	"01.kood.tech/git/jsaar/tic_tac_toe/screenClear"
 )
 
@@ -21,6 +22,6 @@ func Load() {
 		fmt.Println(loadingVisuals[1])
 		fmt.Println(loadingVisuals[2])
 		fmt.Println(loadingVisuals[3])
-		time.Sleep(time.Duration(rand.Intn(150)* int(time.Millisecond)))
+		time.Sleep(time.Duration(rand.Intn(200) * int(time.Millisecond)))
 	}
 }
