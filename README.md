@@ -11,16 +11,19 @@ Intended to use only with Linux Terminal, for other terminals u need to adjust t
 
 To deploy this project:
 Clone and run with
+
 ```bash
 go run .
 ```
+
 or
+
 ```bash
 go build .
 ```
+
 and run the generated file
 
 <p align="center">
-<img src="555.png" width="250" height="auto" title="game picture">
-  <img src="5555.png" width="250" height="auto" title="game picture">
+<img src="123.png" width="450" height="auto" title="game picture">
 </p>
